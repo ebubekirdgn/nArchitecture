@@ -1,7 +1,6 @@
 using Application;
-using Persistence;
 using Core.CrossCuttingConcerns.Exceptions;
-
+using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +27,7 @@ if (app.Environment.IsDevelopment())
 }
 
 if (app.Environment.IsProduction())
-        app.ConfigureCustomExceptionMiddleware();
+    app.ConfigureCustomExceptionMiddleware();
 
 app.UseAuthorization();
 
