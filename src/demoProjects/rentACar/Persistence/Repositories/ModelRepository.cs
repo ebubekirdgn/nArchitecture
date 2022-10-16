@@ -10,5 +10,6 @@ namespace Persistence.Repositories
         public ModelRepository(BaseDbContext context) : base(context)
         {
         }
+
     }
 }

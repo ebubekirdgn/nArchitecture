@@ -25,11 +25,13 @@ public class ElasticSearchManager : IElasticSearch
                                                                  }));
     }
 
+
     public IReadOnlyDictionary<IndexName, IndexState> GetIndexList()
     {
         ElasticClient elasticClient = new(_connectionSettings);
         return elasticClient.Indices.Get(new GetIndexRequest(Indices.All)).Indices;
     }
+
 
     public async Task<IElasticSearchResult> InsertManyAsync(string indexName, object[] items)
     {
@@ -61,6 +63,7 @@ public class ElasticSearchManager : IElasticSearch
             response.IsValid ? "Success" : response.ServerError.Error.Reason);
     }
 
+
     public async Task<IElasticSearchResult> DeleteByElasticIdAsync(ElasticSearchModel model)
     {
         ElasticClient elasticClient = GetElasticClient(model.IndexName);
@@ -70,6 +73,7 @@ public class ElasticSearchManager : IElasticSearch
             response.IsValid,
             response.IsValid ? "Success" : response.ServerError.Error.Reason);
     }
+
 
     public async Task<List<ElasticSearchGetModel<T>>> GetAllSearch<T>(SearchParameters parameters)
         where T : class
@@ -81,6 +85,7 @@ public class ElasticSearchManager : IElasticSearch
                                                  .Index(Indices.Index(parameters.IndexName))
                                                  .From(parameters.From)
                                                  .Size(parameters.Size));
+
 
         List<ElasticSearchGetModel<T>> list = searchResponse.Hits.Select(x => new ElasticSearchGetModel<T>
         {
@@ -108,6 +113,7 @@ public class ElasticSearchManager : IElasticSearch
 
         return list;
     }
+
 
     public async Task<List<ElasticSearchGetModel<T>>> GetSearchBySimpleQueryString<T>(
         SearchByQueryParameters queryParameters)
@@ -146,6 +152,7 @@ public class ElasticSearchManager : IElasticSearch
         return list;
     }
 
+
     public async Task<IElasticSearchResult> InsertAsync(ElasticSearchInsertUpdateModel model)
     {
         ElasticClient elasticClient = GetElasticClient(model.IndexName);
@@ -168,6 +175,7 @@ public class ElasticSearchManager : IElasticSearch
             response.IsValid,
             response.IsValid ? "Success" : response.ServerError.Error.Reason);
     }
+
 
     private ElasticClient GetElasticClient(string indexName)
     {

@@ -4,10 +4,15 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Application.Features.Brands.Commands.CreateBrand
 {
-    public partial class CreateBrandCommand : IRequest<CreatedBrandDto>
+    public partial class CreateBrandCommand:IRequest<CreatedBrandDto>
     {
         public string Name { get; set; }
 
@@ -33,6 +38,7 @@ namespace Application.Features.Brands.Commands.CreateBrand
                 CreatedBrandDto createdBrandDto = _mapper.Map<CreatedBrandDto>(createdBrand);
 
                 return createdBrandDto;
+
             }
         }
     }

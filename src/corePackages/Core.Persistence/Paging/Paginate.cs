@@ -82,6 +82,7 @@ internal class Paginate<TSource, TResult> : IPaginate<TResult>
         }
     }
 
+
     public Paginate(IPaginate<TSource> source, Func<IEnumerable<TSource>, IEnumerable<TResult>> converter)
     {
         Index = source.Index;

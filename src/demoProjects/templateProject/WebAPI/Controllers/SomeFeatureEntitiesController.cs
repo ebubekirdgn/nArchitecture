@@ -14,5 +14,7 @@ namespace WebAPI.Controllers
             CreatedSomeFeatureEntityDto result = await Mediator.Send(createSomeFeatureEntityCommand);
             return Created("", result);
         }
+
+       
     }
 }
